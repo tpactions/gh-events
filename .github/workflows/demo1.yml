@@ -28,13 +28,15 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      - name: Get the js file name
+        id: get-js-file-name
+        run: find dist/assets/*.js -type f -execdir echo '{}' ';'
       #### Artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: |
-            dist
+          path: dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
