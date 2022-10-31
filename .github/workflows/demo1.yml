@@ -21,6 +21,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{ steps.get-js-file-name.outputs.script-file }}
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -30,7 +32,7 @@ jobs:
         run: npm run build
       - name: Get the js file name
         id: get-js-file-name
-        run: find dist/assets/*.js -type f -execdir echo '{}' ';'
+        run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
       #### Artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
