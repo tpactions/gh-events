@@ -32,7 +32,7 @@ jobs:
         run: npm run build
       - name: Get the js file name
         id: getfile
-        run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}'
       #### Artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
